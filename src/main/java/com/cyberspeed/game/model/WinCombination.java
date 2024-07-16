@@ -1,14 +1,29 @@
 package com.cyberspeed.game.model;
 
+import com.fasterxml.jackson.annotation.JsonProperty;
+
 import java.util.List;
 import java.util.StringJoiner;
 
 public class WinCombination {
+
+    @JsonProperty("reward_multiplier")
     private double rewardMultiplier;
+
+    @JsonProperty("when")
     private String when;
+
+    @JsonProperty("count")
     private int count;
+
+    @JsonProperty("group")
     private String group;
+
+    @JsonProperty("covered_areas")
     private List<List<String>> coveredAreas;
+
+    public WinCombination() {
+    }
 
     public WinCombination(final double rewardMultiplier, final String when, final int count, final String group, final List<List<String>> coveredAreas) {
         this.rewardMultiplier = rewardMultiplier;

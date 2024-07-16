@@ -111,10 +111,6 @@ public class Game {
 
         applyBonusSymbols(result);
 
-        System.out.println("Reward: " + result.getReward());
-        System.out.println("Applied Winning Combinations: " + result.getAppliedWinningCombinations());
-        System.out.println("Applied Bonus Symbol: " + result.getAppliedBonusSymbol());
-
         return result;
     }
 
@@ -210,75 +206,4 @@ public class Game {
             }
         }
     }
-
-    /*private int calculateReward(int betAmount) {
-        Map<String, List<String>> appliedWinningCombinations = new HashMap<>();
-        List<String> appliedBonusSymbols = new ArrayList<>();
-
-        double totalReward = 0;
-
-        // Calculate reward for standard symbols
-        for (Map.Entry<String, Symbol> symbolEntry : config.getSymbols().entrySet()) {
-            String symbol = symbolEntry.getKey();
-            Symbol symbolDetails = symbolEntry.getValue();
-            if ("standard".equals(symbolDetails.getType())) {
-                int symbolCount = countSymbol(symbol);
-                for (Map.Entry<String, WinCombination> winEntry : config.getWinCombinations().entrySet()) {
-                    WinCombination winCombination = winEntry.getValue();
-                    if (winCombination.getWhen().equals("same_symbols") && winCombination.getCount() <= symbolCount) {
-                        double reward = betAmount * symbolDetails.getRewardMultiplier() * winCombination.getRewardMultiplier();
-                        totalReward += reward;
-                        appliedWinningCombinations.computeIfAbsent(symbol, k -> new ArrayList<>()).add(winEntry.getKey());
-                    } else if (winCombination.getWhen().equals("linear_symbols")) {
-
-                    }
-                }
-            }
-        }
-
-        // Apply bonus symbols if any winning combination is matched
-        if (!appliedWinningCombinations.isEmpty()) {
-            for (int i = 0; i < this.config.getRows(); i++) {
-                for (int j = 0; j < this.config.getColumns(); j++) {
-                    if (config.getProbabilities().getBonusSymbols().getSymbols().containsKey(matrix[i][j])) {
-                        applyBonus(matrix[i][j], totalReward);
-                        appliedBonusSymbols.add(matrix[i][j]);
-                        break;
-                    }
-                }
-
-            }
-        }
-
-        System.out.println("Applied Winning Combinations: " + appliedWinningCombinations);
-        System.out.println("Applied Bonus Symbols: " + appliedBonusSymbols);
-
-        return (int) totalReward;
-    }*/
-
-    /*private int countSymbol(String symbol) {
-        int count = 0;
-        for (String[] row : matrix) {
-            for (String cell : row) {
-                if (symbol.equals(cell)) {
-                    count++;
-                }
-            }
-        }
-        return count;
-    }
-
-    private void applyBonus(String bonusSymbol, double totalReward) {
-        Symbol bonus = config.getSymbols().get(bonusSymbol);
-        switch (bonus.getImpact()) {
-            case "multiply_reward":
-                totalReward *= bonus.getRewardMultiplier();
-                break;
-            case "extra_bonus":
-                totalReward += bonus.getExtra();
-                break;
-            case "miss":
-                break; // Do nothing
-        }
-    }*/
 }

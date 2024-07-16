@@ -1,14 +1,11 @@
 package com.cyberspeed.game;
 
-import com.cyberspeed.game.model.Config;
 import com.cyberspeed.game.game.Game;
-import com.google.gson.FieldNamingPolicy;
-import com.google.gson.FieldNamingStrategy;
-import com.google.gson.GsonBuilder;
+import com.cyberspeed.game.model.Config;
+import com.cyberspeed.game.result.GameResult;
+import com.fasterxml.jackson.databind.ObjectMapper;
 
-import java.io.BufferedReader;
-import java.io.FileReader;
-import java.lang.reflect.Field;
+import java.io.File;
 
 /**
  * Hello world!
@@ -18,24 +15,14 @@ public class App {
         try {
             String configFilePath = args[1];
             int bettingAmount = Integer.parseInt(args[3]);
+            ObjectMapper objectMapper = new ObjectMapper();
+            Config config = objectMapper.readValue(new File(configFilePath), Config.class);
 
-            //ObjectMapper objectMapper = new ObjectMapper();
-            BufferedReader br = new BufferedReader(new FileReader("config.json"));
-            Config config = new GsonBuilder()
-                    .setFieldNamingStrategy(new FieldNamingStrategy() {
-                        @Override
-                        public String translateName(Field field) {
-                            return FieldNamingPolicy.LOWER_CASE_WITH_UNDERSCORES.translateName(field);
-                        }
-                    })
-                    .create().fromJson(br, Config.class);
-            System.out.println();
             Game game = new Game(config);
-            game.play(bettingAmount);
+            GameResult result = game.play(bettingAmount);
+            objectMapper.writeValue(new File(System.getProperty("user.home")+"/result.json"), result);
         } catch (Exception e) {
             e.printStackTrace();
         }
-
-        System.out.println("Hello World!");
     }
 }

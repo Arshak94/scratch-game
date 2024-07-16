@@ -1,12 +1,25 @@
 package com.cyberspeed.game.model;
 
+import com.fasterxml.jackson.annotation.JsonProperty;
+
 import java.util.StringJoiner;
 
 public class Symbol {
+
+    @JsonProperty("reward_multiplier")
     private double rewardMultiplier;
+
+    @JsonProperty("type")
     private String type;
+
+    @JsonProperty("impact")
     private String impact;
+
+    @JsonProperty("extra")
     private int extra;
+
+    public Symbol() {
+    }
 
     public Symbol(final double rewardMultiplier, final String type, final String impact, final int extra) {
         this.rewardMultiplier = rewardMultiplier;

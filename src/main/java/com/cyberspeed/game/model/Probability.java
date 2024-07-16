@@ -1,12 +1,23 @@
 package com.cyberspeed.game.model;
 
+import com.fasterxml.jackson.annotation.JsonProperty;
+
 import java.util.Map;
 import java.util.StringJoiner;
 
 public class Probability {
+
+    @JsonProperty("column")
     private int column;
+
+    @JsonProperty("row")
     private int row;
+
+    @JsonProperty("symbols")
     private Map<String, Integer> symbols;
+
+    public Probability() {
+    }
 
     public Probability(final int column, final int row, final Map<String, Integer> symbols) {
         this.column = column;
